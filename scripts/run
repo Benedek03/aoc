@@ -7,6 +7,7 @@ g++ $1
 
 if [[ $2 ]]
 then
+    ! [ -f $2 ] && echo 'no such file' $2 && exit
     cat $2 | ./a.out
 else
     ./a.out
