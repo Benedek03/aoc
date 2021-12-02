@@ -5,24 +5,22 @@ using namespace std;
 
 int main()
 {
-    long int horizontal = 0;
-    long int depth = 0;
-    long int aim = 0;
+    int horizontal_position = 0, depth = 0, aim = 0;
 
     for (int i = 0; i < 1000; i++)
     {
         string instruction;
         int X;
         cin >> instruction >> X;
-        if (instruction[0] == 'f')
+        if (instruction == string("down"))
+            aim += X;
+        else if (instruction == string("up"))
+            aim -= X;
+        else
         {
-            horizontal += X;
+            horizontal_position += X;
             depth += X * aim;
         }
-        else if (instruction[0] == 'd')
-            aim += X;
-        else if (instruction[0] == 'u')
-            aim -= X;
     }
-    cout << depth * horizontal << "\n";
+    cout << depth * horizontal_position << "\n";
 }
