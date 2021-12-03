@@ -7,69 +7,61 @@ using namespace std;
 
 int main()
 {
-    const int lines = 1000, columns = 12;
-    vector<string> input(lines);
-    for (int i = 0; i < lines; i++)
+    vector<string> input(1000);
+    for (int i = 0; i < 1000; i++)
         cin >> input[i];
 
-    vector<string> asd(input);
-    for (int i = 0; i < columns; i++)
+    vector<string> oxVector(input);
+    vector<string> ocVector(input);
+    for (int i = 0; i < 12; i++)
     {
-        if (asd.size() == 1)
-            break;
-        int common = 0;
-        for (int j = 0; j < asd.size(); j++)
+        if (oxVector.size() != 1)
         {
-            if (asd[j][i] == '1')
-                common++;
-            else
-                common--;
+            int common = 0, j = 0;
+            for (int j = 0; j < oxVector.size(); j++)
+            {
+                if (oxVector[j][i] == '1')
+                    common++;
+                else
+                    common--;
+            }
+            char good = common >= 0 ? '1' : '0';
+            while (j != oxVector.size())
+            {
+                if (oxVector[j][i] != good)
+                    oxVector.erase(oxVector.begin() + j);
+                else
+                    j++;
+            }
         }
-        char good = common >= 0 ? '1' : '0';
-        int j = 0;
-        while (j != asd.size())
+        if (ocVector.size() != 1)
         {
-            if (asd[j][i] != good)
-                asd.erase(asd.begin() + j);
-            else
-                j++;
-        }
-    }
-    vector<string> asd1(input);
-    for (int i = 0; i < columns; i++)
-    {
-        if (asd1.size() == 1)
-            break;
-        int common = 0;
-        for (int j = 0; j < asd1.size(); j++)
-        {
-            if (asd1[j][i] == '1')
-                common++;
-            else
-                common--;
-        }
-        char good = common < 0 ? '1' : '0';
-        int j = 0;
-        while (j != asd1.size())
-        {
-            if (asd1[j][i] != good)
-                asd1.erase(asd1.begin() + j);
-            else
-                j++;
+            int common = 0, j = 0;
+            for (int j = 0; j < ocVector.size(); j++)
+            {
+                if (ocVector[j][i] == '1')
+                    common++;
+                else
+                    common--;
+            }
+            char good = common < 0 ? '1' : '0';
+            while (j != ocVector.size())
+            {
+                if (ocVector[j][i] != good)
+                    ocVector.erase(ocVector.begin() + j);
+                else
+                    j++;
+            }
         }
     }
 
-    int ox = 0;
-    for (int j = 0; j < columns; j++)
+    int ox = 0, oc = 0;
+    for (int j = 0; j < 12; j++)
     {
-        if (asd[0][j] == '1')
-            ox += pow(2, columns - j - 1);
-    }
-    int oc = 0;
-    for (int j = 0; j < columns; j++)
-    {
-        if (asd1[0][j] == '1')
-            oc += pow(2, columns - j - 1);
+        if (oxVector[0][j] == '1')
+            ox += pow(2, 11 - j);
+        if (ocVector[0][j] == '1')
+            oc += pow(2, 11 - j);
     }
     cout << ox * oc << "\n";
 }

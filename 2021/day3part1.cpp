@@ -6,15 +6,12 @@ using namespace std;
 
 int main()
 {
-    const int lines = 1000, columns = 12;
-    int gamma = 0, epsilon = 0;
-
-    int common[columns] = {0};
-    for (int i = 0; i < lines; i++)
+    int common[12] = {0};
+    for (int i = 0; i < 1000; i++)
     {
         string in;
         cin >> in;
-        for (int j = 0; j < columns; j++)
+        for (int j = 0; j < 12; j++)
         {
             if (in[j] == '1')
                 common[j]++;
@@ -23,13 +20,13 @@ int main()
         }
     }
 
-    for (int j = 0; j < columns; j++)
+    int gamma = 0, epsilon = 0;
+    for (int j = 0; j < 12; j++)
     {
         if (common[j] > 0)
-            gamma += pow(2, columns - j - 1);
+            gamma += pow(2, 11 - j);
         else
-            epsilon += pow(2, columns - j - 1);
+            epsilon += pow(2, 11 - j);
     }
-
     cout << gamma * epsilon << "\n";
 }
