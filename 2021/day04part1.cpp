@@ -21,7 +21,7 @@ void draw(int num)
 }
 int check()
 {
-    for (int x = 0; x < 100; x++)
+    for (int x = 0; x < boards.size(); x++)
     {
         vector<vector<tile>> board = boards[x];
         for (int i = 0; i < 5; i++)
