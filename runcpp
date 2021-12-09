@@ -1,0 +1,14 @@
+#!/bin/bash
+
+! [[ $1 ]] && echo 'no file given' && exit
+! [ -f $1 ] && echo 'no such file' $1 && exit
+
+g++ $1
+
+if [[ $2 ]]
+then
+    ! [ -f $2 ] && echo 'no such file' $2 && exit
+    cat $2 | ./a.out
+else
+    ./a.out
+fi

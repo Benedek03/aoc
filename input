@@ -1,0 +1,69 @@
+#!/bin/bash
+
+d=$(dirname $0)
+
+cyear=$(TZ='UTC+5' date +%Y)
+cmonth=$(TZ='UTC+5' date +%m)
+cmonth=${cmonth#0}
+cday=$(TZ='UTC+5' date +%d)
+cday=${cday#0}
+
+while (( $# > 0 )) ; do case $1 in
+
+	-d | --day )
+		shift
+		
+	 	(( $1 >= 1 )) && (( $1 <= 25 )) ||
+			{ echo 'Day has to a number between 1 and 25.'; exit; }
+		
+		day=$1
+		;;
+
+	-y | --year )
+		shift
+		
+		(( $1 >= 2015 )) ||
+			{ echo 'Year has to a number greater than 2015 (first Advent of Code).'; exit; }
+
+		year=$1
+		;;
+
+	-h | --help )
+		echo 'Usage: input [-yd]'
+		echo 'Get the input for the given day of Advent of Code'
+		echo
+		echo '-y, --year   set the year to use'
+		echo '-d, --day    set the day to use'
+		
+		exit
+		;;
+
+	* )
+		echo "Invalid argument '$1'. Use input -h to see options."
+		exit
+		;;
+
+esac; shift; done
+[[ "$1" == '--' ]] && shift
+
+[[ -z "$day" ]] && {
+	[[ $cmonth = 12 ]] && day=$cday ||
+		{ echo "Can't guess day (it's not advent and no day was specified)."; exit; }
+}
+
+: ${year:=$cyear}
+
+[[ $cmonth = 12 ]] && (( $day <= $cday )) && (( $year <= $cyear )) || 
+	{ echo "Impatient, aren't we?"; exit; }
+
+i="$d/$year/inputs"
+[ -d "$i" ] || mkdir -p "$i"
+i="$i/$day"
+! [ -f "$i" ] && {
+	echo "$d/cookies"
+	wget --load-cookies "$d/cookies.txt" \
+	     "https://adventofcode.com/$year/day/$(printf %d $day)/input" \
+	     -O "$i" ||
+	    	 { echo "Couldn't download input"; rm -rf "$i"; exit; }
+}
+cat "$i"
