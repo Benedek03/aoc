@@ -8,6 +8,9 @@ using namespace std;
 int main()
 {
     vector<vector<int>> map(100, vector<int>(100, 0));
+    vector<int> res(3, 0);
+    stack<pair<int, int>> s;
+    int curr;
     for (int i = 0; i < 100; i++)
         for (int j = 0; j < 100; j++)
         {
@@ -17,44 +20,18 @@ int main()
                 map[i][j] = -1;
         }
 
-    vector<int> res(3, 0);
     for (int i = 0; i < 100; i++)
     {
         for (int j = 0; j < 100; j++)
         {
             if (map[i][j] == 1)
                 continue;
+            curr = 0;
+            s.push({i, j});
             map[i][j] = 1;
-            int curr = 0;
-            stack<pair<int, int>> s;
-            if (i > 0 && map[i - 1][j] == 0)
-            {
-                map[i - 1][j] = 1;
-                s.push({i - 1, j});
-                curr++;
-            }
-            if (i < 99 && map[i + 1][j] == 0)
-            {
-                map[i + 1][j] = 1;
-                s.push({i + 1, j});
-                curr++;
-            }
-            if (j > 0 && map[i][j - 1] == 0)
-            {
-                map[i][j - 1] = 1;
-                s.push({i, j - 1});
-                curr++;
-            }
-            if (j < 99 && map[i][j + 1] == 0)
-            {
-                map[i][j + 1] = 1;
-                s.push({i, j + 1});
-                curr++;
-            }
             while (!s.empty())
             {
-                pair<int, int> a = s.top();
-                int x = a.first, y = a.second;
+                int x = s.top().first, y = s.top().second;
                 s.pop();
                 if (i > 0 && map[x - 1][y] == 0)
                 {
@@ -86,6 +63,5 @@ int main()
                 res[0] = curr;
         }
     }
-    cout << res[0] << " " << res[1] << " " << res[2] << "\n";
     cout << res[0] * res[1] * res[2] << "\n";
 }
