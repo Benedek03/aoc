@@ -60,7 +60,6 @@ i="$d/$year/inputs"
 [ -d "$i" ] || mkdir -p "$i"
 i="$i/$day"
 ! [ -f "$i" ] && {
-	echo "$d/cookies"
 	wget --load-cookies "$d/cookies.txt" \
 	     "https://adventofcode.com/$year/day/$(printf %d $day)/input" \
 	     -O "$i" ||
