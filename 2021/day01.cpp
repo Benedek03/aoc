@@ -1,6 +1,3 @@
-#include <fstream>
-#include <iostream>
-
 #include "../common/puzzle.hpp"
 
 class Solution : public Puzzle {
