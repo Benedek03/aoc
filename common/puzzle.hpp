@@ -17,7 +17,10 @@ class Puzzle {
    public:
     Puzzle(std::string inputFileName = "") {
         inputFile.open(inputFileName);
-        if (!inputFile.is_open()) throw "Can't open file";
+        if (!inputFile.is_open()) {
+            std::cerr << "file is not open!";
+            exit(1);
+        }
     }
     void solve(std::ostream& os = std::cout) {
         resetFile();
