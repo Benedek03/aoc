@@ -24,8 +24,7 @@ class Solution : public Puzzle {
         }
         int sum = 0;
         for (int i = 0; i < 9; i++) sum += arr[i];
-        cout << sum << "\n";
-        return "TODO";
+        return std::to_string(sum);
     }
     std::string part2() {
         long int arr[9] = {0};
@@ -43,8 +42,7 @@ class Solution : public Puzzle {
         }
         long int sum = 0;
         for (int i = 0; i < 9; i++) sum += arr[i];
-        cout << sum << "\n";
-        return "TODO";
+        return std::to_string(sum);
     }
 };
 
