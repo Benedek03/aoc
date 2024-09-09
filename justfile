@@ -16,7 +16,7 @@ input-all:
   done
 
 run-cpp year day: 
-  g++ -Wall -Werror ./$1/day$2.cpp -lcrypto -o a.out && ./a.out
+  g++ -Wall -Werror ./year$1/day$2.cpp -lcrypto -o a.out && ./a.out
 
 run-mjs year day:
-  node ./$1/day$2.mjs
+  node ./year$1/day$2.mjs
