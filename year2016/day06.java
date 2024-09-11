@@ -1,8 +1,6 @@
 package year2016;
 
 import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Map;
 
 import common.puzzle;
 
