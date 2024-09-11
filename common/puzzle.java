@@ -26,6 +26,7 @@ public abstract class puzzle {
     protected abstract String part2();
 
     protected void solve() {
+        System.out.println("==========");
         System.out.println("part1: " + part1());
         System.out.println("part2: " + part2());
     }
